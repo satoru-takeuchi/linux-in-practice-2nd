@@ -3,12 +3,13 @@
 import sys
 import time
 import os
-import plot
+import plot_sched
 
 def usage():
-    print("""使い方: {} <並列度>
-        * 論理CPU0上で<並列度>の数だけ同時に100ミリ秒程度CPUリソースを消費する負荷処理を起動した後に、すべてのプロセスの終了を待つ。
-        * "<処理の番号(0~(並列度-1)>.jpg"というファイルに実行結果を示したグラフを書き出す。
+    print("""使い方: {} <nice値>
+        * 論理CPU0上で100ミリ秒程度CPUリソースを消費する負荷処理を2つ起動した後に、両方のプロセスの終了を待つ。
+        * 負荷処理0,1のnice値はそれぞれ0（デフォルト）、<nice値>とする。
+        * "sched-2.jpg"というファイルに実行結果を示したグラフを書き出す。
         * グラフのx軸はプロセス開始からの経過時間[ミリ秒]、y軸は進捗[%]""".format(progname, file=sys.stderr))
     sys.exit(1)
 
@@ -41,7 +42,8 @@ def child_fn(n):
 if len(sys.argv) < 2:
     usage()
 
-concurrency = int(sys.argv[1])
+nice = int(sys.argv[1])
+concurrency = 2
 
 if concurrency < 1:
     print("<並列度>は1以上の整数にしてください: {}".format(concurrency))
@@ -52,8 +54,6 @@ os.sched_setaffinity(0, {0})
 
 nloop_per_msec = estimate_loops_per_msec()
 
-input("見積もりが終わりました。ENTERを押してください: ")
-
 start = time.perf_counter()
 
 for i in range(concurrency):
@@ -61,9 +61,11 @@ for i in range(concurrency):
     if (pid < 0):
         exit(1)
     elif pid == 0:
+        if i == concurrency - 1:
+            os.nice(nice)
         child_fn(i)
 
 for i in range(concurrency):
     os.wait()
 
-plot.plot_sched(concurrency)
+plot_sched.plot_sched(concurrency)

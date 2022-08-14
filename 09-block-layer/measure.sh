@@ -147,6 +147,6 @@ for SCHED in ${SCHEDULERS} ; do
     done
 done
 
-./plot
+./plot-block.py
 
 rm ${DATA_FILE}

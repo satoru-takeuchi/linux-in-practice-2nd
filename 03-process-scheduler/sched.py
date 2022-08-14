@@ -3,7 +3,7 @@
 import sys
 import time
 import os
-import plot
+import plot_sched
 
 def usage():
     print("""使い方: sched <プロセス数>
@@ -64,4 +64,4 @@ for i in range(concurrency):
 for i in range(concurrency):
     os.wait()
 
-plot.plot_sched(concurrency)
+plot_sched.plot_sched(concurrency)

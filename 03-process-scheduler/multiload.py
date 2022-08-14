@@ -41,7 +41,7 @@ if [ $MULTICPU -eq 0 ] ; then
 fi
 
 for ((i=0;i<CONCURRENCY;i++)) do
-    time "${SCRIPT_DIR}/load" &
+    time "${SCRIPT_DIR}/load.py" &
 done
 
 for ((i=0;i<CONCURRENCY;i++)) do

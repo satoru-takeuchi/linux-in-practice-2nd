@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import sys
-import plot
+import plot_sched
 
 def usage():
     print("""使い方: sched <最大プロセス数>
@@ -16,5 +16,5 @@ if len(sys.argv) < 2:
     usage()
 
 max_nproc = int(sys.argv[1])
-plot.plot_avg_tat(max_nproc)
-plot.plot_throughput(max_nproc)
+plot_sched.plot_avg_tat(max_nproc)
+plot_sched.plot_throughput(max_nproc)

@@ -56,7 +56,7 @@ func main() {
 		end := time.Since(start)
 		f.Write([]byte(fmt.Sprintf("%f\t%f\n", i, float64(NACCESS)/float64(end.Nanoseconds()))))
 	}
-	command := exec.Command("./plot")
+	command := exec.Command("./plot-cache.py")
 	out, err := command.Output()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "コマンド実行に失敗しました: %q: %q", err, string(out))
