@@ -9,14 +9,14 @@ usage() {
     2. 性能情報をもとに平均スループットのグラフを作って'avg-tat.jpg'に保存
     3. 同、スループットのグラフを作って'throughput.jpg'に保存
     
-    -mオプションはmeasureプログラムにそのまま渡す"
+    -mオプションはmultiload.shプログラムにそのまま渡す"
     exit 1
 }
 
 measure() {
     local nproc=$1
     local opt=$2
-    bash -c "time ./multiload $opt $nproc" 2>&1 | grep real | sed -n -e 's/^.*0m\([.0-9]*\)s$/\1/p' | awk -v nproc=$nproc '
+    bash -c "time ./multiload.sh $opt $nproc" 2>&1 | grep real | sed -n -e 's/^.*0m\([.0-9]*\)s$/\1/p' | awk -v nproc=$nproc '
 BEGIN{
     sum_tat=0
 }
@@ -48,10 +48,10 @@ if [ $# -lt 1 ]; then
     usage
 fi
 
-rm -f perf.data
+rm -f cpuperf.data
 MAX_NPROC=$1
 for ((i=1;i<=MAX_NPROC;i++)) ; do
     measure $i $MEASURE_OPT  >>cpuperf.data
 done
 
-./plot-perf $MAX_NPROC
+./plot-perf.py $MAX_NPROC

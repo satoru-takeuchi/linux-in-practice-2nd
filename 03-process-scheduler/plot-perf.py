@@ -4,7 +4,7 @@ import sys
 import plot_sched
 
 def usage():
-    print("""使い方: sched <最大プロセス数>
+    print("""使い方: {} <最大プロセス数>
     * cpuperfプログラムの実行結果を保存した"perf.data"ファイルをもとに性能情報を示すグラフを作る。
     * "avg-tat.jpg"ファイルに平均ターンアラウンドタイムのグラフを保存する。
     * "throughput.jpg"ファイルにスループットのグラフを保存する。""".format(progname, file=sys.stderr))
