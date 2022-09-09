@@ -18,7 +18,7 @@ def plot_cache():
     x, y = np.loadtxt("out.txt", unpack=True)
     ax.scatter(x,y,s=1)
     ax.set_title("キャッシュメモリの効果の可視化")
-    ax.set_xlabel("バッファサイズ[2^x KB]")
+    ax.set_xlabel("バッファサイズ[2^x KiB]")
     ax.set_ylabel("アクセス速度[アクセス/ナノ秒]")
 
     # Ubuntu 20.04のmatplotlibのバグを回避するために一旦pngで保存してからjpgに変換している

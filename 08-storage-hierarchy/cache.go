@@ -46,7 +46,7 @@ func main() {
 			log.Fatal("mmap()に失敗しました")
 		}
 
-		fmt.Printf("バッファサイズ 2^%.2f(%d) KB についてのデータを収集中...\n", i, bufSize/1024)
+		fmt.Printf("バッファサイズ 2^%.2f(%d) KiB についてのデータを収集中...\n", i, bufSize/1024)
 		start := time.Now()
 		for i := 0; i < NACCESS/(bufSize/CACHE_LINE_SIZE); i++ {
 			for j := 0; j < bufSize; j += CACHE_LINE_SIZE {
