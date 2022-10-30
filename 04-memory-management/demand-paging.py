@@ -11,7 +11,7 @@ PAGE_SIZE   = 4096
 def show_message(msg):
 	print("{}: {}".format(datetime.datetime.now().strftime("%H:%M:%S"), msg))
 
-show_message("新規メモリ領域獲得前。Enterキーを押すと100iMBの新規メモリ領域を獲得します: ")
+show_message("新規メモリ領域獲得前。Enterキーを押すと100MiBの新規メモリ領域を獲得します: ")
 input()
 
 # mmap()システムコールの呼び出しによって100MiBのメモリ領域を獲得
