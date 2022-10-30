@@ -25,7 +25,7 @@ func main() {
 	}
 	defer file.Close()
 
-	// mmap()システムコールの呼び出しによって1GBのメモリ領域を獲得
+	// mmap()システムコールの呼び出しによって5バイトのメモリ領域を獲得
 	data, err := syscall.Mmap(int(file.Fd()), 0, 5, syscall.PROT_READ|syscall.PROT_WRITE, syscall.MAP_SHARED)
 	if err != nil {
 		log.Fatal("mmap()に失敗しました")
