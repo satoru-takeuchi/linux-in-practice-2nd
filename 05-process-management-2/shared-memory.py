@@ -15,7 +15,7 @@ shared_memory[0:8] = data.to_bytes(8, byteorder)
 
 pid = os.fork()
 if pid < 0:
-	print("fork()に失敗しました", file=os.stderr)
+	print("fork()に失敗しました", file=sys.stderr)
 elif pid == 0:
 	data = int.from_bytes(shared_memory[0:8], byteorder)
 	data *= 2

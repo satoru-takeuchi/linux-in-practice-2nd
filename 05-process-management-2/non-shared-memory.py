@@ -8,7 +8,7 @@ data = 1000
 print("子プロセス生成前のデータの値: {}".format(data))
 pid = os.fork()
 if pid < 0:
-	print("fork()に失敗しました", file=os.stderr)
+	print("fork()に失敗しました", file=sys.stderr)
 elif pid == 0:
 	data *= 2
 	sys.exit(0)

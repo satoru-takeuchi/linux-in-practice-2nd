@@ -26,7 +26,7 @@ show_meminfo("*** 子プロセス生成前 ***", "親プロセス")
 
 pid = os.fork()
 if pid < 0:
-	print("fork()に失敗しました", file=os.stderr)
+	print("fork()に失敗しました", file=sys.stderr)
 elif pid == 0:
 	show_meminfo("*** 子プロセス生成直後 ***", "子プロセス")
 	access(data)
