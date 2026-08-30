@@ -24,10 +24,13 @@ data = mmap.mmap(-1, ALLOC_SIZE, flags=mmap.MAP_PRIVATE)
 access(data)
 show_meminfo("*** 子プロセス生成前 ***", "親プロセス")
 
-pid = os.fork()
-if pid < 0:
+try:
+	pid = os.fork()
+except OSError:
 	print("fork()に失敗しました", file=sys.stderr)
-elif pid == 0:
+	sys.exit(1)
+
+if pid == 0:
 	show_meminfo("*** 子プロセス生成直後 ***", "子プロセス")
 	access(data)
 	show_meminfo("*** 子プロセスによるメモリアクセス後 ***", "子プロセス")
